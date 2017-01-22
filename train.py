@@ -12,7 +12,20 @@ class SampleListener(Leap.Listener):
     finger_names = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
     angles = {'Thumb': 0, 'Index': 0, 'Middle': 0, 'Ring': 0, 'Pinky': 0}
     def on_frame(self, controller):
-        pass
+        frame = controller.frame()
+        self.reset_values()
+        for hand in frame.hands:
+            palmNormal = hand.palm_normal
+
+            #   Get fingers
+            for finger in hand.fingers:
+                fingerAngle = finger.direction.angle_to(palmNormal) * 57.2958
+                self.angles[self.finger_names[finger.type]] = fingerAngle
+
+        # Print avg values
+        # print (listenerObj.angles)
+        print self.angles
+
     def reset_values(self):
         self.angles = {'Thumb': 0, 'Index': 0, 'Middle': 0, 'Ring': 0, 'Pinky': 0}
 
@@ -39,6 +52,7 @@ def main():
     listener = SampleListener()
     controller = Leap.Controller()
 
+    controller.add_listener(listener)
     # Keep this process running until Enter is pressed
     print "Press Enter to quit..."
     try:
