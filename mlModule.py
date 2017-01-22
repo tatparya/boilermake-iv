@@ -39,6 +39,8 @@ def main():
     listener = SampleListener()
     controller = Leap.Controller()
 
+    controller.add_listener(listener)
+
     # wait for prediction set
     print "Reading prediction set..."
 
@@ -48,13 +50,13 @@ def main():
             tc = sys.stdin.readline()
             currentFrame = controller.frame()
             angles = analyzeFrame(listener, currentFrame, tc)
-            print(clf.predict([angles.values()]))
+            print angles
+            print(clf.predict([[angles['Thumb'],angles['Index'], angles['Middle'], angles['Ring'], angles['Pinky']]]))
     except KeyboardInterrupt:
         pass
     finally:
         # Remove the sample listener when done
         controller.remove_listener(listener)
-
 
 if __name__ == "__main__":
     main()
