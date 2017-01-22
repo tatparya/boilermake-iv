@@ -13,10 +13,12 @@ class SampleListener(Leap.Listener):
     angles = {'Thumb': 0, 'Index': 0, 'Middle': 0, 'Ring': 0, 'Pinky': 0}
     def on_frame(self, controller):
         pass
+    def reset_values(self):
+        self.angles = {'Thumb': 0, 'Index': 0, 'Middle': 0, 'Ring': 0, 'Pinky': 0}
 
 def analyzeFrame( listenerObj, currentFrame, letter ):
     frame = currentFrame
-
+    listenerObj.reset_values()
     for hand in frame.hands:
         palmNormal = hand.palm_normal
 
@@ -26,9 +28,10 @@ def analyzeFrame( listenerObj, currentFrame, letter ):
             listenerObj.angles[listenerObj.finger_names[finger.type]] = fingerAngle
 
     #   Print avg values
-    print (listenerObj.angles)
-    with open("training_set.txt", 'a') as feature_file:
-        feature_file.write("%f\t%f\t%f\t%f\t%f\t%s" % (listenerObj.angles['Thumb'], listenerObj.angles['Index'], listenerObj.angles['Middle'], listenerObj.angles['Ring'], listenerObj.angles['Pinky'], letter))
+    if len(frame.hands) != 0:
+        print (listenerObj.angles)
+        with open("training_set.txt", 'a') as feature_file:
+            feature_file.write("%f\t%f\t%f\t%f\t%f\t%s" % (listenerObj.angles['Thumb'], listenerObj.angles['Index'], listenerObj.angles['Middle'], listenerObj.angles['Ring'], listenerObj.angles['Pinky'], letter))
 
 
 def main():
