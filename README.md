@@ -1,5 +1,5 @@
 # SignLeap
-
+<img src="https://www.derivative.ca/wiki088/images/f/fc/LeapMotion.png">
 <h3> Boilermake IV Hackathon Project</h3>
 <br>
 <h3>Objective: American Sign Language -> Text / Audio Conversion</h3>
