@@ -1,9 +1,8 @@
 # SignLeap
 
-<h2> Boilermake IV Hackathon Project</h2>
-<hr>
+<h3> Boilermake IV Hackathon Project</h3>
 <br>
-<h2>Objective: American Sign Language -> Text / Audio Conversion</h2>
+<h3>Objective: American Sign Language -> Text / Audio Conversion</h3>
 <h3>Description</h3>
 <p>
 The application uses a Leap Motion to track the users hand and uses <b>Machine Learning</b> to convert given standard (American Sign Language) hand gestures to text and audio.
